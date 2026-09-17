@@ -1,0 +1,28 @@
+name: CI
+
+# Runs on every push and every pull request. This is the "CI/CD" the JD asks about:
+# a machine re-runs lint + tests + build on a clean checkout so "works on my machine" is not a defense.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # `npm ci` installs exactly what package-lock.json pins — reproducible, unlike `npm install`.
+      - run: npm ci
+
+      - run: npm run lint
+
+      - run: npm run test
+
+      - run: npm run build
