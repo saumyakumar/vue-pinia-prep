@@ -58,8 +58,11 @@ const AsyncPanelForSuspense = defineAsyncComponent(() => import('@/components/As
       <button @click="showSuspense = !showSuspense; suspenseKey++">toggle</button>
       <Suspense v-if="showSuspense" :key="suspenseKey">
         <AsyncPanelForSuspense />
+        <!-- Both Suspense slots must resolve to a SINGLE root node — wrap
+             multi-node fallback content in one element (a bare "<Spinner/> text"
+             pair is two roots and Vue throws "slots expect a single root node"). -->
         <template #fallback>
-          <BaseSpinner label="Fetching products…" /> loading…
+          <p><BaseSpinner label="Fetching products…" /> loading…</p>
         </template>
       </Suspense>
     </div>
@@ -72,6 +75,7 @@ const AsyncPanelForSuspense = defineAsyncComponent(() => import('@/components/As
         <li><code>defineAsyncComponent</code> = per-component code splitting with built-in loading/error UI. Router lazy imports do the same at the route level (lesson 16).</li>
         <li><code>&lt;Suspense&gt;</code> coordinates one loading state for a subtree whose components use top-level <code>await</code>. Still officially "experimental" but widely used; pair with an error boundary (lesson 15).</li>
         <li>Give <code>&lt;Suspense&gt;</code> a <code>key</code> to force it to re-suspend when inputs change.</li>
+        <li>Both the default slot and <code>#fallback</code> must resolve to <strong>exactly one root node</strong>. A stray sibling text node (like the "loading…" next to <code>&lt;BaseSpinner/&gt;</code> above) trips <code>"&lt;Suspense&gt; slots expect a single root node"</code> and the whole subtree fails to render — wrap multi-node content in one element.</li>
       </ul>
     </details>
   </div>

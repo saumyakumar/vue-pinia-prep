@@ -33,7 +33,18 @@ async function riskyAsync() {
       <button @click="((boom = false), boundary?.reset())">reset</button>
 
       <ErrorBoundary ref="boundary">
-        <Bomb :explode="boom" />
+        <!--
+          :key="boom" forces Vue to DESTROY and REMOUNT Bomb every time `boom`
+          flips, instead of patching the existing instance's props in place.
+          This matters because Bomb's throw lives in setup() — and setup() only
+          ever runs ONCE per instance, at mount. Without the :key, clicking
+          "detonate" just updates the existing Bomb's `explode` prop and
+          re-renders its template; the `if (props.explode) throw` check already
+          ran (with explode=false) and never runs again, so nothing crashes.
+          With the :key, "detonate" mounts a BRAND NEW Bomb with explode=true
+          from the start, so its setup() throws for real.
+        -->
+        <Bomb :key="boom" :explode="boom" />
       </ErrorBoundary>
 
       <h3>Async errors</h3>
@@ -51,6 +62,7 @@ async function riskyAsync() {
       <summary>Key takeaways / interview points</summary>
       <ul>
         <li><code>onErrorCaptured(hook)</code> in an ancestor catches descendant errors from render, lifecycle, watchers and <em>sync</em> event handlers. <code>return false</code> stops propagation.</li>
+        <li><strong><code>setup()</code> runs once per instance</strong>, at mount — a prop changing later re-renders the template but does NOT re-run <code>setup()</code>. If a bug (or a demo!) needs setup-time logic to run again, either move the logic into a <code>watch(() =&gt; props.x, ...)</code>, or force a remount with a changing <code>:key</code> (what <code>&lt;Bomb :key="boom"&gt;</code> does above). This trips people up well beyond error handling — e.g. "why didn't my composable's setup code re-run when the prop changed?".</li>
         <li>Build a reusable <code>&lt;ErrorBoundary&gt;</code> component — Vue has no built-in one. Give it a <code>reset()</code> and a fallback slot.</li>
         <li><code>app.config.errorHandler</code> is the global net — wire your monitoring here. Also add <code>app.config.warnHandler</code> in dev.</li>
         <li>Async/promise rejections aren't captured — use <code>try/catch</code> in the action, or a store that records an <code>error</code> field (see <code>stores/auth.js</code>), plus a <code>window.addEventListener('unhandledrejection')</code> backstop.</li>

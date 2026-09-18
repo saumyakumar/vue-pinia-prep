@@ -12,13 +12,14 @@ export function useLocalStorage(key, defaultValue) {
   watch(
     state,
     (value) => {
+      console.log('value', value)
       try {
         localStorage.setItem(key, JSON.stringify(value))
       } catch {
         /* quota exceeded / storage disabled — fail silently in a demo */
       }
     },
-    { deep: true },
+    { deep: true }
   )
 
   function read() {
