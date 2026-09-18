@@ -17,18 +17,18 @@ import { flatLessons } from '@/router/lessons'
       every comment → expand “Key takeaways / interview points” at the bottom → move on.
     </div>
 
-    <h2>Milestone A — what's built now</h2>
+    <h2>Milestones A + B — what's built now</h2>
     <ul>
       <li><strong>Lessons 01–15</strong>: Vue 3 core (reactivity, components, composables, directives, Teleport/transitions, error handling)</li>
       <li><strong>Lessons 16–17</strong>: Vue Router (params, nested routes, guards)</li>
       <li><strong>Lessons 18–22</strong>: Pinia (option &amp; setup stores, advanced APIs, plugins, testing)</li>
-      <li>A small <strong>design system</strong> in <code>src/design-system/</code> used throughout</li>
+      <li><strong>Lessons 23–35</strong>: forms, a real REST layer, WebSockets/real-time, ECharts + Chart.js + D3, large-dataset performance, design systems, accessibility, responsive design, security, testing strategy, TypeScript migration</li>
+      <li>A small <strong>design system</strong> in <code>src/design-system/</code> used throughout, plus a mock backend + WebSocket in <code>src/api/</code></li>
     </ul>
 
     <h2>Coming next</h2>
     <ul>
-      <li><strong>Milestone B</strong> — lessons 23–35: forms, REST layer, WebSockets/real-time, ECharts + Chart.js + D3, large-dataset performance, accessibility, security, testing strategy, TypeScript</li>
-      <li><strong>Milestone C</strong> — the “Business Insights” capstone dashboard + test suite + CI</li>
+      <li><strong>Milestone C</strong> — the “Business Insights” capstone dashboard (KPI monitoring, cross-filtering charts, a virtualized 50k-row table, a streamed AI insights panel) + the full test suite + CI</li>
     </ul>
 
     <h2>All lessons</h2>

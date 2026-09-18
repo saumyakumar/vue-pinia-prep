@@ -9,6 +9,43 @@ REST + WebSocket, ECharts/Chart.js/D3, dashboards, design systems, accessibility
 
 ---
 
+## Screenshots
+
+<table>
+<tr>
+<td width="50%">
+<img src="docs/screenshots/01-overview.png" width="420" alt="Course overview page"><br>
+<sub>Course overview — 35 lessons across Vue core, Router, Pinia, and the dashboard skill set</sub>
+</td>
+<td width="50%">
+<img src="docs/screenshots/02-echarts-dashboard.png" width="420" alt="ECharts dashboard lesson"><br>
+<sub>ECharts — dual-axis line chart with dataZoom + a live gauge</sub>
+</td>
+</tr>
+<tr>
+<td width="50%">
+<img src="docs/screenshots/03-virtual-table.png" width="420" alt="Virtualized 50,000-row table"><br>
+<sub>A virtualized table over 50,000 rows — ~24 DOM nodes, no matter the row count</sub>
+</td>
+<td width="50%">
+<img src="docs/screenshots/04-design-system.png" width="420" alt="Design system lesson"><br>
+<sub>The token-driven design system used throughout the app</sub>
+</td>
+</tr>
+<tr>
+<td width="50%">
+<img src="docs/screenshots/05-forms-validation.png" width="420" alt="Forms and validation lesson"><br>
+<sub>Forms & validation with a hand-rolled <code>useForm</code> composable</sub>
+</td>
+<td width="50%">
+<img src="docs/screenshots/06-dark-mode.png" width="420" alt="Dark mode"><br>
+<sub>Dark mode, token-driven throughout</sub>
+</td>
+</tr>
+</table>
+
+---
+
 ## Prerequisites
 
 Node.js **20+** and npm. This repo was scaffolded and verified with **Node 20.20.2 / npm 10.8.2**,
